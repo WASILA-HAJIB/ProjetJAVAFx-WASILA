@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+
+<HBox prefHeight="850.0" prefWidth="1350.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javaproject.controllers.ProjetController">
+    <children>
+        <VBox prefWidth="280.0" spacing="20.0" style="-fx-background-color: linear-gradient(to bottom, #0f0c29, #302b63, #24243e); -fx-padding: 40 20 40 20; -fx-background-radius: 0 30 30 0;">
+            <children>
+                <VBox alignment="CENTER" spacing="15.0">
+                    <children>
+                        <StackPane>
+                            <children>
+                                <Circle radius="45.0" fill="#1a1a2e" stroke="#f39c12" strokeWidth="3.0" />
+                                <Label text="PM" textFill="WHITE" style="-fx-font-weight: 900; -fx-font-size: 24;"/>
+                            </children>
+                        </StackPane>
+                        <Label text="PROJECT MANAGER" textFill="WHITE" style="-fx-font-weight: 800; -fx-letter-spacing: 2;">
+                            <font><Font size="16.0" /></font>
+                        </Label>
+                    </children>
+                </VBox>
+                <Separator opacity="0.2" />
+                <VBox spacing="10.0">
+                    <children>
+                        <Button onAction="#goToDashboard" prefWidth="Infinity" text="📊 TABLEAU DE BORD"
+                                style="-fx-background-color: transparent; -fx-text-fill: white; -fx-alignment: CENTER_LEFT; -fx-padding: 15; -fx-font-weight: bold; -fx-cursor: hand;">
+                        </Button>
+                        <Button onAction="#goToFactures" prefWidth="Infinity" text="🧾 Factures" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-alignment: CENTER_LEFT; -fx-padding: 15;"/>
+                        <Button onAction="#goToProduits" prefWidth="Infinity" text="📦 Produits" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-alignment: CENTER_LEFT; -fx-padding: 15;"/>
+                        <Button onAction="#goToEmployes" prefWidth="Infinity" text="👥 Employés" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-alignment: CENTER_LEFT; -fx-padding: 15;"/>
+                        <Button prefWidth="Infinity" text="🚀 PROJETS" style="-fx-background-color: rgba(255,255,255,0.1); -fx-text-fill: #f39c12; -fx-alignment: CENTER_LEFT; -fx-padding: 15; -fx-font-weight: bold;"/>
+                        <Button text="Ouvrir l'Assistant AI" onAction="#goToChatbot"
+                                style="-fx-background-color: #2D6A4F; -fx-text-fill: white;" />
+                    </children>
+                </VBox>
+                <Region VBox.vgrow="ALWAYS" />
+                <Button onAction="#onLogout" prefWidth="Infinity" text="🚪 DECONNEXION" style="-fx-background-color: #ff0844; -fx-text-fill: white; -fx-padding: 15; -fx-background-radius: 12; -fx-font-weight: bold;"/>
+            </children>
+        </VBox>
+
+        <StackPane HBox.hgrow="ALWAYS">
+            <children>
+
+                <Region style="-fx-background-color: rgba(0, 0, 0, 0.8);" />
+
+                <VBox spacing="25.0" style="-fx-padding: 40;">
+                    <children>
+                        <Label text="SUIVI DES PROJETS" textFill="WHITE" style="-fx-font-weight: 900; -fx-font-size: 40;" />
+
+                        <HBox spacing="30.0" VBox.vgrow="ALWAYS">
+                            <children>
+                                <VBox prefWidth="400.0" spacing="15.0" style="-fx-background-color: rgba(255,255,255,0.1); -fx-padding: 25; -fx-background-radius: 20; -fx-border-color: rgba(255,255,255,0.2);">
+                                    <children>
+                                        <TextField fx:id="nomField" promptText="Nom du projet" style="-fx-background-radius: 10; -fx-padding: 12;"/>
+                                        <TextArea fx:id="descriptionArea" prefHeight="80.0" promptText="Description..." style="-fx-background-radius: 10;"/>
+                                        <DatePicker fx:id="dateDebutPicker" prefWidth="Infinity" promptText="Date début" />
+                                        <DatePicker fx:id="dateFinPicker" prefWidth="Infinity" promptText="Date fin" />
+                                        <ComboBox fx:id="statusCombo" prefWidth="Infinity" promptText="Statut du projet" />
+
+                                        <HBox spacing="10">
+                                            <children>
+                                                <TextField fx:id="lieuField" HBox.hgrow="ALWAYS" promptText="Lien Google Maps" style="-fx-background-radius: 10;"/>
+                                                <Button onAction="#openGoogleMaps" text="📍 MAPS" style="-fx-background-color: #4facfe; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;"/>
+                                            </children>
+                                        </HBox>
+
+                                        <VBox spacing="10" style="-fx-padding: 20 0 0 0;">
+                                            <children>
+                                                <Button onAction="#onAdd" prefWidth="Infinity" text="CRÉER LE PROJET" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 15; -fx-background-radius: 10;"/>
+                                                <Button onAction="#onUpdate" prefWidth="Infinity" text="MODIFIER" style="-fx-background-color: #f39c12; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10; -fx-background-radius: 10;"/>
+                                                <Button onAction="#onDelete" prefWidth="Infinity" text="SUPPRIMER" style="-fx-background-color: #ff0844; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10; -fx-background-radius: 10;"/>
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                </VBox>
+
+                                <TableView fx:id="tableProjets" HBox.hgrow="ALWAYS">
+                                    <columns>
+                                        <TableColumn fx:id="colNom" text="NOM" prefWidth="120"/>
+                                        <TableColumn fx:id="colStatus" text="STATUT" prefWidth="100"/>
+                                        <TableColumn fx:id="colDebut" text="DÉBUT" prefWidth="100"/>
+                                        <TableColumn fx:id="colFin" text="FIN" prefWidth="100"/>
+                                        <TableColumn fx:id="colLieu" text="LOCALISATION" prefWidth="150"/>
+                                    </columns>
+                                    <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY" /></columnResizePolicy>
+                                </TableView>
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+            </children>
+        </StackPane>
+    </children>
+</HBox>

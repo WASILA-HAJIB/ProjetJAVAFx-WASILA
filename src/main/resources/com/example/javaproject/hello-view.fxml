@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+
+<StackPane prefHeight="800.0" prefWidth="1200.0"
+           xmlns="http://javafx.com/fxml/1" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.example.javaproject.controllers.HelloController">
+
+    <children>
+        <ImageView fitHeight="850.0" fitWidth="1250.0" preserveRatio="false">
+            <image>
+                <Image url="https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&amp;fit=crop&amp;w=1350&amp;q=80" />
+            </image>
+        </ImageView>
+
+        <Region style="-fx-background-color: linear-gradient(to bottom right, rgba(15, 12, 41, 0.8), rgba(48, 43, 99, 0.6));" />
+
+        <AnchorPane>
+            <children>
+                <VBox alignment="CENTER" spacing="30.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <children>
+                        <VBox alignment="CENTER" maxWidth="450.0" spacing="30.0"
+                              style="-fx-background-color: rgba(255, 255, 255, 0.15);
+                                     -fx-background-radius: 40;
+                                     -fx-border-color: rgba(255, 255, 255, 0.3);
+                                     -fx-border-radius: 40;
+                                     -fx-border-width: 2;
+                                     -fx-padding: 50;">
+
+                            <effect>
+                                <DropShadow color="#00000088" radius="30" />
+                            </effect>
+
+                            <children>
+                                <Label text="RH CONNECT" textFill="WHITE" style="-fx-font-weight: 900; -fx-letter-spacing: 5;">
+                                    <font><Font size="38.0" /></font>
+                                    <effect><DropShadow color="#00d2ff" radius="10"/></effect>
+                                </Label>
+
+                                <VBox spacing="15.0">
+                                    <TextField fx:id="usernameField" promptText="Identifiant"
+                                               style="-fx-background-color: rgba(255,255,255,0.1); -fx-text-fill: white; -fx-background-radius: 15; -fx-padding: 12; -fx-border-color: rgba(255,255,255,0.3); -fx-border-radius: 15;"/>
+
+                                    <PasswordField fx:id="passwordField" promptText="Mot de passe"
+                                                   style="-fx-background-color: rgba(255,255,255,0.1); -fx-text-fill: white; -fx-background-radius: 15; -fx-padding: 12; -fx-border-color: rgba(255,255,255,0.3); -fx-border-radius: 15;"/>
+                                </VBox>
+
+                                <Button onAction="#onLoginButtonClick" prefWidth="350.0" text="S'IDENTIFIER"
+                                        style="-fx-background-color: linear-gradient(to right, #00d2ff, #3a7bd5);
+                                               -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 20;
+                                               -fx-cursor: hand; -fx-padding: 15; -fx-font-size: 14;">
+                                    <effect><DropShadow color="#00d2ff" radius="15"/></effect>
+                                </Button>
+
+                                <Separator opacity="0.2" maxWidth="150" />
+
+                                <Button onAction="#showRegisterModal" prefWidth="350.0" text="CRÉER UN COMPTE"
+                                        style="-fx-background-color: transparent; -fx-text-fill: white;
+                                               -fx-border-color: white; -fx-border-radius: 20;
+                                               -fx-border-width: 1.5; -fx-font-weight: bold; -fx-cursor: hand; -fx-padding: 12;"/>
+
+                                <Hyperlink onAction="#onForgotPasswordClick" text="Accès restreint ? Contactez l'admin" style="-fx-text-fill: rgba(255,255,255,0.7);" />
+                                <Label fx:id="messageLabel" textFill="#ff4b2b" style="-fx-font-weight: bold;" />
+                            </children>
+                        </VBox>
+                    </children>
+                </VBox>
+            </children>
+        </AnchorPane>
+
+        <StackPane fx:id="registerModal" visible="false" style="-fx-background-color: rgba(15, 12, 41, 0.9);">
+            <children>
+                <VBox alignment="CENTER" maxWidth="500.0" maxHeight="600.0" spacing="25.0"
+                      style="-fx-background-color: #ffffff; -fx-background-radius: 40; -fx-padding: 40;">
+                    <effect>
+                        <DropShadow color="#000000bb" radius="40" />
+                    </effect>
+                    <children>
+                        <Label text="NOUVEL ACCÈS" style="-fx-text-fill: #1e3c72; -fx-font-weight: 900;">
+                            <font><Font size="32.0" /></font>
+                        </Label>
+
+                        <VBox spacing="15.0">
+                            <TextField fx:id="regUsernameField" promptText="Identifiant de connexion" style="-fx-background-radius: 15; -fx-padding: 12; -fx-background-color: #f0f2f5;"/>
+                            <PasswordField fx:id="regPasswordField" promptText="Mot de passe robuste" style="-fx-background-radius: 15; -fx-padding: 12; -fx-background-color: #f0f2f5;"/>
+                            <PasswordField fx:id="confirmPasswordField" promptText="Confirmer le mot de passe" style="-fx-background-radius: 15; -fx-padding: 12; -fx-background-color: #f0f2f5;"/>
+                        </VBox>
+
+                        <Button onAction="#onRegisterButtonClick" prefWidth="400.0" text="ACTIVER MON COMPTE"
+                                style="-fx-background-color: #1e3c72; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 25; -fx-padding: 15; -fx-cursor: hand;"/>
+
+                        <Hyperlink onAction="#hideRegisterModal" text="Déjà inscrit ? Connectez-vous" style="-fx-text-fill: #1e3c72; -fx-font-weight: bold;" />
+                    </children>
+                </VBox>
+            </children>
+        </StackPane>
+    </children>
+</StackPane>

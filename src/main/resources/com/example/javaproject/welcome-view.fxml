@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.effect.DropShadow?>
+
+<StackPane prefHeight="800.0" prefWidth="1300.0"
+           style="-fx-background-color: #F4F7FB;"
+           xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.example.javaproject.controllers.WelcomeController">
+    <children>
+
+        <VBox alignment="CENTER" spacing="30.0" maxWidth="600.0" maxHeight="400.0"
+              style="-fx-background-color: white; -fx-background-radius: 40;">
+            <padding>
+                <Insets bottom="60.0" left="60.0" right="60.0" top="60.0" />
+            </padding>
+            <effect>
+                <DropShadow color="#00000015" radius="30" offsetY="15" />
+            </effect>
+            <children>
+
+                <Label text="ESPACE EMPLOYÉ" textFill="#4A90E2"
+                       style="-fx-background-color: #EBF4FF; -fx-padding: 8 20; -fx-background-radius: 20; -fx-font-weight: 800; -fx-letter-spacing: 1.5;">
+                    <font><Font size="12.0" /></font>
+                </Label>
+
+                <VBox alignment="CENTER" spacing="10">
+                    <Label text="Bienvenue," textFill="#718096">
+                        <font><Font size="26.0" /></font>
+                    </Label>
+
+                    <Label fx:id="userNameLabel" text="UTILISATEUR" textAlignment="CENTER" wrapText="true"
+                           textFill="#2D3748" style="-fx-font-weight: 900;">
+                        <font><Font size="42.0" /></font>
+                    </Label>
+                </VBox>
+
+                <Separator maxWidth="250.0" opacity="0.3" />
+
+                <Label text="Vous êtes connecté à votre portail RH." textFill="#A0AEC0">
+                    <font><Font size="16.0" /></font>
+                </Label>
+
+                <Region prefHeight="20"/>
+                <Separator maxWidth="250.0" opacity="0.3" />
+
+                <Label text="Vous êtes connecté à votre portail RH." textFill="#A0AEC0">
+                    <font><Font size="16.0" /></font>
+                </Label>
+
+                <VBox spacing="15" alignment="CENTER">
+                    <children>
+                        <Button onAction="#goToPointage" text="🕒 Accéder au Pointage" prefHeight="55.0" prefWidth="250.0"
+                                style="-fx-background-color: #4A90E2; -fx-text-fill: white; -fx-font-weight: 800; -fx-font-size: 16; -fx-background-radius: 15; -fx-cursor: hand;">
+                            <effect>
+                                <DropShadow color="#4A90E244" radius="10" offsetY="5" />
+                            </effect>
+                        </Button>
+
+                        <Button onAction="#handleLogout" text="🚪 Se déconnecter" prefHeight="55.0" prefWidth="250.0"
+                                style="-fx-background-color: transparent; -fx-text-fill: #E53E3E; -fx-font-weight: 800; -fx-font-size: 14; -fx-cursor: hand;" />
+                    </children>
+                    <Button onAction="#handleAdvancedPointage" text="🔍 POINTAGE AVANCÉ (QR CODE)"
+                            prefHeight="55" prefWidth="320"
+                            style="-fx-background-color: #6B46C1; -fx-text-fill: white; -fx-font-weight: 800; -fx-background-radius: 12; -fx-cursor: hand;">
+                        <effect>
+                            <DropShadow color="#6b46c144" radius="10" offsetY="4" />
+                        </effect>
+                    </Button>
+                </VBox>
+                <Button onAction="#handleLogout" text="🚪 Se déconnecter" prefHeight="55.0" prefWidth="250.0"
+                        style="-fx-background-color: #2D3748; -fx-text-fill: white; -fx-font-weight: 800; -fx-font-size: 16; -fx-background-radius: 15; -fx-cursor: hand;">
+                    <effect>
+                        <DropShadow color="#00000033" radius="10" offsetY="5" />
+                    </effect>
+                </Button>
+
+            </children>
+        </VBox>
+
+    </children>
+</StackPane>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox alignment="CENTER" spacing="20.0" style="-fx-background-color: #1A202C;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javaproject.controllers.QrPointageController">
+    <children>
+        <Label text="SCANNEZ VOTRE CODE QR" textFill="WHITE">
+            <font><Font name="System Bold" size="24.0" /></font>
+        </Label>
+
+        <StackPane fx:id="cameraContainer" prefHeight="360.0" prefWidth="480.0" style="-fx-border-color: #4A5568; -fx-border-width: 2;">
+            <children>
+                <ImageView fx:id="webcamView" fitHeight="360.0" fitWidth="480.0" preserveRatio="true" />
+
+                <VBox fx:id="successOverlay" alignment="CENTER" visible="false" prefHeight="360.0" prefWidth="480.0" style="-fx-background-color: rgba(0, 255, 0, 0.4);">
+                    <children>
+                        <Label text="✅" textFill="WHITE" style="-fx-font-size: 100;" />
+                        <Label text="POINTAGE VALIDÉ" textFill="WHITE" style="-fx-font-size: 20; -fx-font-weight: bold;" />
+                    </children>
+                </VBox>
+            </children>
+        </StackPane>
+
+        <Label fx:id="qrStatusLabel" text="Recherche du code..." textFill="#63B3ED">
+            <font><Font name="System Italic" size="16.0" /></font>
+        </Label>
+
+        <Button onAction="#goBack" text="ANNULER / RETOUR" style="-fx-background-color: #E53E3E; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10 20; -fx-background-radius: 8;" />
+    </children>
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+</VBox>

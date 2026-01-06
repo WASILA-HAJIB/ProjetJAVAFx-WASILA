@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.effect.DropShadow?>
+
+<HBox prefHeight="850.0" prefWidth="1350.0" style="-fx-background-color: #F4F7F6;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javaproject.controllers.ChatbotController">
+    <children>
+        <VBox prefWidth="280.0" spacing="15.0" style="-fx-background-color: linear-gradient(to bottom, #1B4332, #2D6A4F); -fx-background-radius: 0 40 40 0;">
+            <padding><Insets bottom="30.0" left="20.0" right="20.0" top="40.0" /></padding>
+            <children>
+                <VBox alignment="CENTER" spacing="10.0">
+                    <children>
+                        <Circle fill="WHITE" radius="40.0" />
+                        <Label style="-fx-font-weight: bold; -fx-font-size: 18;" text="RH CONNECT" textFill="WHITE" />
+                    </children>
+                </VBox>
+                <Separator opacity="0.2" />
+
+                <VBox spacing="10.0" VBox.vgrow="ALWAYS">
+                    <children>
+                        <Button onAction="#goToDashboard" prefWidth="Infinity" style="-fx-background-color: transparent; -fx-text-fill: #D8F3DC; -fx-alignment: CENTER_LEFT; -fx-cursor: hand;" text="📊 Tableau de Bord" />
+                        <Button prefWidth="Infinity" style="-fx-background-color: white; -fx-text-fill: #1B4332; -fx-background-radius: 12; -fx-font-weight: bold;" text="🤖 ASSISTANT IA" />
+
+                        <Separator opacity="0.2" style="-fx-padding: 10 0;" />
+
+                        <Label text="OPTIONS CHAT" textFill="#D8F3DC" style="-fx-font-size: 10; -fx-font-weight: bold; -fx-opacity: 0.7;" />
+
+                        <Button onAction="#handleNewChat" prefWidth="Infinity" style="-fx-background-color: #40916C; -fx-text-fill: white; -fx-background-radius: 10; -fx-cursor: hand; -fx-font-weight: bold;" text="➕ Nouveau Chat" />
+
+                        <VBox spacing="5">
+                            <Label text="Rechercher dans l'historique :" textFill="#D8F3DC" style="-fx-font-size: 11;" />
+
+                            <TextField fx:id="searchField" promptText="🔍 Mot-clé..."
+                                       style="-fx-background-radius: 10; -fx-background-color: #1B4332; -fx-text-fill: white; -fx-prompt-text-fill: #74c69d; -fx-border-color: #40916C; -fx-border-radius: 10;" />
+                        </VBox>
+                        <Label text="ANCIENS CHATS" textFill="#D8F3DC" style="-fx-font-size: 10; -fx-font-weight: bold; -fx-opacity: 0.7;" />
+                        <ListView fx:id="sessionListView" prefHeight="200.0"
+                                  style="-fx-background-color: transparent; -fx-background: transparent; -fx-control-inner-background: transparent;" />
+                        <Button onAction="#toggleFavoritesFilter" prefWidth="Infinity"
+                                style="-fx-background-color: transparent; -fx-text-fill: #D8F3DC; -fx-alignment: CENTER_LEFT; -fx-cursor: hand;"
+                                text="⭐ Mes Favoris" />
+                        <Region VBox.vgrow="ALWAYS" />
+
+                        <Button onAction="#clearHistory" prefWidth="Infinity" style="-fx-background-color: #A4161A; -fx-text-fill: white; -fx-background-radius: 8; -fx-font-size: 12; -fx-cursor: hand;" text="🗑️ Effacer l'historique" />
+                    </children>
+                </VBox>
+            </children>
+        </VBox>
+
+        <VBox HBox.hgrow="ALWAYS" spacing="20.0" style="-fx-padding: 40;">
+            <children>
+                <VBox>
+                    <Label style="-fx-font-weight: 900; -fx-font-size: 35; -fx-text-fill: #1B4332;" text="Assistant Intelligent" />
+                    <Label style="-fx-font-size: 16; -fx-text-fill: #52796F;" text="Historique des conversations enregistré dans usersdb." />
+                </VBox>
+
+                <VBox style="-fx-background-color: white; -fx-background-radius: 25; -fx-border-color: #E0E0E0; -fx-border-radius: 25;" VBox.vgrow="ALWAYS">
+                    <children>
+                        <ScrollPane fx:id="chatScrollPane" fitToWidth="true" style="-fx-background-color: transparent; -fx-background: transparent;" VBox.vgrow="ALWAYS">
+                            <content>
+                                <VBox fx:id="chatContainer" spacing="15.0" style="-fx-padding: 30;" />
+                            </content>
+                        </ScrollPane>
+                        <Separator />
+                        <HBox spacing="15.0" style="-fx-padding: 20;">
+                            <children>
+                                <TextField fx:id="questionField" onAction="#handleSend" promptText="Posez votre question à l'IA..." HBox.hgrow="ALWAYS" style="-fx-background-radius: 30; -fx-padding: 15; -fx-background-color: #F8FAF9;" />
+                                <Button onAction="#handleSend" style="-fx-background-color: #2D6A4F; -fx-text-fill: white; -fx-background-radius: 30; -fx-padding: 10 30; -fx-font-weight: bold; -fx-cursor: hand;" text="ENVOYER" />
+                            </children>
+                        </HBox>
+                    </children>
+                    <effect><DropShadow color="#00000011" radius="20" /></effect>
+                </VBox>
+            </children>
+        </VBox>
+    </children>
+</HBox>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.effect.DropShadow?>
+
+<HBox prefHeight="850.0" prefWidth="1300.0" style="-fx-background-color: #0a0a1a; -fx-font-family: 'Segoe UI';" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javaproject.controllers.DashboardController">
+    <children>
+        <VBox prefWidth="260.0" spacing="15.0" style="-fx-background-color: #0d0d1a; -fx-padding: 30; -fx-border-color: #1e1e2f; -fx-border-width: 0 1 0 0;">
+            <children>
+                <Label text="CORE ADMIN" textFill="#00d2ff" style="-fx-font-weight: 900; -fx-font-size: 22; -fx-letter-spacing: 2;" />
+                <Separator opacity="0.1" />
+
+                <VBox spacing="10" VBox.vgrow="ALWAYS">
+                    <children>
+                        <Button onAction="#goToDashboard" prefWidth="Infinity" text="📊 Dashboard"
+                                style="-fx-background-color: linear-gradient(to right, #00d2ff, #3a7bd5); -fx-text-fill: white; -fx-alignment: CENTER_LEFT; -fx-background-radius: 8; -fx-padding: 12; -fx-font-weight: bold; -fx-cursor: hand;"/>
+
+                        <Button onAction="#goToFactures" prefWidth="Infinity" text="🧾 Factures"
+                                style="-fx-background-color: transparent; -fx-text-fill: #b2bec3; -fx-alignment: CENTER_LEFT; -fx-padding: 10; -fx-cursor: hand;"/>
+
+                        <Button onAction="#goToProjets" prefWidth="Infinity" text="🚀 Projets"
+                                style="-fx-background-color: transparent; -fx-text-fill: #b2bec3; -fx-alignment: CENTER_LEFT; -fx-padding: 10; -fx-cursor: hand;"/>
+
+                        <Button onAction="#goToEmployes" prefWidth="Infinity" text="👥 Employés"
+                                style="-fx-background-color: transparent; -fx-text-fill: #b2bec3; -fx-alignment: CENTER_LEFT; -fx-padding: 10; -fx-cursor: hand;"/>
+
+                        <Button onAction="#goToProduits" prefWidth="Infinity" text="📦 Stocks"
+                                style="-fx-background-color: transparent; -fx-text-fill: #b2bec3; -fx-alignment: CENTER_LEFT; -fx-padding: 10; -fx-cursor: hand;"/>
+
+                        <Button onAction="#goToChatbot" prefWidth="Infinity" text="🤖 Assistant AI"
+                                style="-fx-background-color: #2D6A4F; -fx-text-fill: white; -fx-alignment: CENTER_LEFT; -fx-padding: 10; -fx-background-radius: 8; -fx-cursor: hand;" />
+                    </children>
+                </VBox>
+
+                <Region VBox.vgrow="ALWAYS" />
+                <Button onAction="#onLogout" prefWidth="Infinity" text="DECONNEXION"
+                        style="-fx-background-color: #ff4757; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-padding: 10; -fx-cursor: hand;"/>
+            </children>
+        </VBox>
+
+        <VBox spacing="35.0" HBox.hgrow="ALWAYS" style="-fx-padding: 40;">
+            <children>
+                <VBox spacing="5">
+                    <Label text="Tableau de Bord Premium" textFill="WHITE" style="-fx-font-size: 32; -fx-font-weight: 900;" />
+                    <Label text="Analyse en temps réel de votre activité" textFill="#a4b0be" style="-fx-font-size: 15;" />
+                </VBox>
+
+                <HBox spacing="25.0">
+                    <children>
+                        <VBox prefWidth="250.0" style="-fx-background-color: linear-gradient(to bottom right, #f39c12, #e67e22); -fx-background-radius: 15; -fx-padding: 20;">
+                            <children>
+                                <Label text="Total Projets" textFill="WHITE" style="-fx-font-size: 14; -fx-opacity: 0.9;" />
+                                <Label fx:id="statProjets" text="0" textFill="WHITE" style="-fx-font-size: 38; -fx-font-weight: 900;" />
+                                <Label text="En cours de suivi" textFill="WHITE" style="-fx-font-size: 11; -fx-font-style: italic;" />
+                            </children>
+                            <effect><DropShadow color="#e67e2266" radius="15" /></effect>
+                        </VBox>
+
+                        <VBox prefWidth="250.0" style="-fx-background-color: linear-gradient(to bottom right, #00d2ff, #3a7bd5); -fx-background-radius: 15; -fx-padding: 20;">
+                            <children>
+                                <Label text="Employés" textFill="WHITE" style="-fx-font-size: 14; -fx-opacity: 0.9;" />
+                                <Label fx:id="statEmployes" text="0" textFill="WHITE" style="-fx-font-size: 38; -fx-font-weight: 900;" />
+                                <Label text="Effectif total" textFill="WHITE" style="-fx-font-size: 11; -fx-font-style: italic;" />
+                            </children>
+                            <effect><DropShadow color="#00d2ff66" radius="15" /></effect>
+                        </VBox>
+
+                        <VBox prefWidth="250.0" style="-fx-background-color: linear-gradient(to bottom right, #6c5ce7, #a29bfe); -fx-background-radius: 15; -fx-padding: 20;">
+                            <children>
+                                <Label text="Factures" textFill="WHITE" style="-fx-font-size: 14; -fx-opacity: 0.9;" />
+                                <Label fx:id="statFactures" text="0" textFill="WHITE" style="-fx-font-size: 38; -fx-font-weight: 900;" />
+                                <Label text="Flux financier" textFill="WHITE" style="-fx-font-size: 11; -fx-font-style: italic;" />
+                            </children>
+                            <effect><DropShadow color="#6c5ce766" radius="15" /></effect>
+                        </VBox>
+
+                        <VBox prefWidth="250.0" style="-fx-background-color: linear-gradient(to bottom right, #ff4757, #ff6b81); -fx-background-radius: 15; -fx-padding: 20;">
+                            <children>
+                                <Label text="Alertes Stock" textFill="WHITE" style="-fx-font-size: 14; -fx-opacity: 0.9;" />
+                                <Label fx:id="statStockAlerte" text="0" textFill="WHITE" style="-fx-font-size: 38; -fx-font-weight: 900;" />
+                                <Label text="Action requise" textFill="WHITE" style="-fx-font-size: 11; -fx-font-weight: bold;" />
+                            </children>
+                            <effect><DropShadow color="#ff475766" radius="15" /></effect>
+                        </VBox>
+                    </children>
+                </HBox>
+
+                <HBox spacing="25.0" VBox.vgrow="ALWAYS">
+                    <children>
+                        <VBox style="-fx-background-color: #16162d; -fx-background-radius: 20; -fx-padding: 25; -fx-border-color: #1e1e2f; -fx-border-width: 1;" HBox.hgrow="ALWAYS">
+                            <Label text="Répartition des Factures" textFill="WHITE" style="-fx-font-weight: bold; -fx-font-size: 18;"/>
+                            <PieChart fx:id="factureChart" legendSide="BOTTOM" style="-fx-pie-label-visible: true;" />
+                        </VBox>
+
+                        <VBox style="-fx-background-color: #16162d; -fx-background-radius: 20; -fx-padding: 25; -fx-border-color: #1e1e2f; -fx-border-width: 1;" HBox.hgrow="ALWAYS">
+                            <Label text="Répartition des Employés" textFill="WHITE" style="-fx-font-weight: bold; -fx-font-size: 18;"/>
+                            <PieChart fx:id="employeChart" legendSide="BOTTOM" style="-fx-pie-label-visible: true;" />
+                        </VBox>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </children>
+</HBox>
