@@ -70,6 +70,10 @@
                             <DropShadow color="#6b46c144" radius="10" offsetY="4" />
                         </effect>
                     </Button>
+                    <Button onAction="#handleGesturePointage" text="🖐️ Vous etes en retard Pointer Geste"
+                            prefHeight="55.0" prefWidth="250.0"
+                            style="-fx-background-color: #38A169; -fx-text-fill: white; -fx-font-weight: 800; -fx-background-radius: 15; -fx-cursor: hand;">
+                    </Button>
                 </VBox>
                 <Button onAction="#handleLogout" text="🚪 Se déconnecter" prefHeight="55.0" prefWidth="250.0"
                         style="-fx-background-color: #2D3748; -fx-text-fill: white; -fx-font-weight: 800; -fx-font-size: 16; -fx-background-radius: 15; -fx-cursor: hand;">

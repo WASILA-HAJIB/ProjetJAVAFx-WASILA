@@ -11,7 +11,7 @@ public class ChatbotService {
 
     public ChatbotService() {
         this.model = OpenAiChatModel.builder()
-                .apiKey("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")
+                //.apiKey("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")
                 .baseUrl("https://api.groq.com/openai/v1")
                 .modelName("llama-3.1-8b-instant")
                 .temperature(0.7)

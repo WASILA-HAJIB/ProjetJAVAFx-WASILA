@@ -1,20 +1,18 @@
 package com.example.javaproject.controllers;
 
 import com.example.javaproject.services.DashboardService;
+import com.example.javaproject.utils.SceneManager; // Manager utilisé
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
-import javafx.stage.Stage;
-import java.io.IOException;
+import javafx.event.ActionEvent;
 import java.util.Map;
 
 public class DashboardController {
 
     @FXML private Label statProjets, statEmployes, statFactures, statStockAlerte;
     @FXML private PieChart factureChart;
-    @FXML private PieChart employeChart; // Remplacement de congeChart
+    @FXML private PieChart employeChart;
 
     private final DashboardService service = new DashboardService();
 
@@ -25,16 +23,12 @@ public class DashboardController {
 
     private void refreshDashboard() {
         try {
-            // 1. Stats numériques via le Service
             statProjets.setText(String.valueOf(service.getCountProjets()));
             statEmployes.setText(String.valueOf(service.getCountEmployes()));
             statFactures.setText(String.valueOf(service.getCountFactures()));
             statStockAlerte.setText(String.valueOf(service.getCountAlertesStock()));
-
-            // 2. Graphiques
             setupFacturePieChart();
             setupEmployePieChart();
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -59,21 +53,13 @@ public class DashboardController {
         employeChart.setTitle("Répartition par Poste");
     }
 
-    private void navigate(String fxmlFile) {
-        try {
-            Stage stage = (Stage) statProjets.getScene().getWindow();
-            Parent root = FXMLLoader.load(getClass().getResource(fxmlFile));
-            stage.getScene().setRoot(root);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+    // --- NAVIGATION CENTRALISÉE VIA SWITCHMANAGER ---
 
-    @FXML private void goToDashboard() { navigate("/com/example/javaproject/dashboard-view.fxml"); }
-    @FXML private void goToFactures() { navigate("/com/example/javaproject/facture-view.fxml"); }
-    @FXML private void goToProjets() { navigate("/com/example/javaproject/projet-view.fxml"); }
-    @FXML private void goToEmployes() { navigate("/com/example/javaproject/employe-view.fxml"); }
-    @FXML private void goToProduits() { navigate("/com/example/javaproject/produit-view.fxml"); }
-    @FXML private void goToChatbot() { navigate("/com/example/javaproject/chatbot-page-view.fxml"); }
-    @FXML private void onLogout() { navigate("/com/example/javaproject/hello-view.fxml"); }
+    @FXML private void goToDashboard(ActionEvent event) { SceneManager.switchScene(event, "dashboard-view.fxml"); }
+    @FXML private void goToFactures(ActionEvent event) { SceneManager.switchScene(event, "facture-view.fxml"); }
+    @FXML private void goToProjets(ActionEvent event) { SceneManager.switchScene(event, "projet-view.fxml"); }
+    @FXML private void goToEmployes(ActionEvent event) { SceneManager.switchScene(event, "employe-view.fxml"); }
+    @FXML private void goToProduits(ActionEvent event) { SceneManager.switchScene(event, "produit-view.fxml"); }
+    @FXML private void goToChatbot(ActionEvent event) { SceneManager.switchScene(event, "chatbot-page-view.fxml"); }
+    @FXML private void onLogout(ActionEvent event) { SceneManager.switchScene(event, "hello-view.fxml"); }
 }

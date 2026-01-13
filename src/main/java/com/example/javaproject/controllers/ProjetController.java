@@ -5,15 +5,14 @@ import com.example.javaproject.services.ProjetService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
+
 import java.awt.Desktop;
-import java.io.IOException;
 import java.net.URI;
 import java.util.Optional;
+import com.example.javaproject.utils.SceneManager;
+import javafx.event.ActionEvent;
 
 public class ProjetController {
 
@@ -154,22 +153,38 @@ public class ProjetController {
     }
 
     // --- NAVIGATION CONSERVÉE ---
-    private void switchScene(String fxmlFile) {
-        try {
-            Stage stage = (Stage) nomField.getScene().getWindow();
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlFile));
-            Scene scene = new Scene(fxmlLoader.load());
-            stage.setScene(scene);
-        } catch (IOException e) { e.printStackTrace(); }
+    @FXML
+    private void goToDashboard(ActionEvent event) {
+        SceneManager.switchScene(event, "dashboard-view.fxml");
     }
 
-    @FXML private void goToDashboard() { switchScene("/com/example/javaproject/dashboard-view.fxml"); }
-    @FXML private void goToFactures() { switchScene("/com/example/javaproject/facture-view.fxml"); }
-    @FXML private void goToProduits() { switchScene("/com/example/javaproject/produit-view.fxml"); }
-    @FXML private void goToEmployes() { switchScene("/com/example/javaproject/employe-view.fxml"); }
-    @FXML private void onLogout() { switchScene("/com/example/javaproject/login-view.fxml"); }
     @FXML
-    private void goToChatbot() {
-        switchScene("/com/example/javaproject/chatbot-page-view.fxml");
+    private void goToFactures(ActionEvent event) {
+        SceneManager.switchScene(event, "facture-view.fxml");
+    }
+
+    @FXML
+    private void goToProjets(ActionEvent event) {
+        SceneManager.switchScene(event, "projet-view.fxml");
+    }
+
+    @FXML
+    private void goToEmployes(ActionEvent event) {
+        SceneManager.switchScene(event, "employe-view.fxml");
+    }
+
+    @FXML
+    private void goToProduits(ActionEvent event) {
+        SceneManager.switchScene(event, "produit-view.fxml");
+    }
+
+    @FXML
+    private void goToChatbot(ActionEvent event) {
+        SceneManager.switchScene(event, "chatbot-page-view.fxml");
+    }
+
+    @FXML
+    private void onLogout(ActionEvent event) {
+        SceneManager.switchScene(event, "hello-view.fxml");
     }
 }

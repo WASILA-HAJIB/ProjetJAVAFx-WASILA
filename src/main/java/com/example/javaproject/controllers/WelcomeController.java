@@ -1,55 +1,52 @@
 package com.example.javaproject.controllers;
 
+import com.example.javaproject.utils.SceneManager; // IMPORT DU MANAGER
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
+import javafx.stage.StageStyle;
+
 import java.io.IOException;
 
 public class WelcomeController {
 
     @FXML private Label userNameLabel;
-
-    // Variables pour stocker les infos de l'employé connecté
     private int currentEmployeId;
     private String nomStocke;
     private String prenomStocke;
 
-    /**
-     * Cette méthode reçoit les infos depuis le Login (HelloController)
-     */
     public void setUserInfo(int id, String nom, String prenom) {
         this.currentEmployeId = id;
         this.nomStocke = nom;
         this.prenomStocke = prenom;
-
-        // Mise à jour de l'affichage du nom
         if (userNameLabel != null) {
             userNameLabel.setText(nom.toUpperCase() + " " + prenom);
         }
     }
 
     /**
-     * Aller vers la page de pointage CLASSIQUE
+     * Aller vers la page de pointage CLASSIQUE (Cas avec passage de données)
      */
     @FXML
     private void goToPointage(ActionEvent event) {
         try {
+            // Pour les pages où on doit ENVOYER des données (ID, Nom),
+            // on charge le loader pour accéder au contrôleur
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/javaproject/pointage-view.fxml"));
             Parent root = loader.load();
 
-            // Passage des infos au PointageController
             PointageController pCtrl = loader.getController();
             pCtrl.setInfo(currentEmployeId, nomStocke, prenomStocke);
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.setTitle("Pointage Quotidien");
-            stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -61,39 +58,51 @@ public class WelcomeController {
     @FXML
     private void handleAdvancedPointage(ActionEvent event) {
         try {
-            // 1. Charger le fichier FXML de la vue QR
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/javaproject/qr-pointage-view.fxml"));
             Parent root = loader.load();
 
-            // 2. Récupérer le contrôleur QR
             QrPointageController qrController = loader.getController();
-
-            // CORRECTION ICI : Utilisation des bonnes variables (nomStocke, etc.)
             qrController.setUserInfo(this.currentEmployeId, this.nomStocke, this.prenomStocke);
 
-            // 3. Changement de scène
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.setTitle("Pointage par QR Code");
-            stage.show();
-
         } catch (IOException e) {
-            System.err.println("Erreur chargement QR View: " + e.getMessage());
             e.printStackTrace();
         }
     }
 
+    /**
+     * DÉCONNEXION : Ici on utilise le SwitchManager car il n'y a pas de données à transmettre !
+     */
     @FXML
     private void handleLogout(ActionEvent event) {
+        // Simple, propre et en une seule ligne !
+        SceneManager.switchScene(event, "hello-view.fxml");
+    }
+    @FXML
+    private void handleGesturePointage(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/javaproject/hello-view.fxml"));
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(loader.load()));
-            stage.setTitle("Connexion");
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/javaproject/gesture-view.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Pointage Geste");
+            stage.setScene(new Scene(root));
+
+            GesturePointageController ctrl = loader.getController();
+
+            // On affiche la fenêtre D'ABORD
+            stage.show();
+
+            // On initialise la caméra APRÈS (le thread interne de initData gérera la lourdeur)
+            ctrl.initData(this.currentEmployeId);
+
+            stage.setOnCloseRequest(e -> ctrl.closeAction());
+
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
-
 }

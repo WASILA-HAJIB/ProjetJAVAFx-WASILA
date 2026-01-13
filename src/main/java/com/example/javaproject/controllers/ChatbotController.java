@@ -5,17 +5,13 @@ import com.example.javaproject.services.ChatbotService;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
-import javafx.stage.Stage;
-import java.io.IOException;
-import java.util.List;
 
+import java.util.List;
+import com.example.javaproject.utils.SceneManager;
 public class ChatbotController {
     @FXML private VBox chatContainer;
     @FXML private TextField questionField;
@@ -28,6 +24,7 @@ public class ChatbotController {
     private int currentSessionId = 1;
     private boolean showingFavorites = false;
 
+    //scroll automatique
     @FXML
     public void initialize() {
         chatContainer.heightProperty().addListener((obs, oldVal, newVal) -> chatScrollPane.setVvalue(1.0));
@@ -138,10 +135,9 @@ public class ChatbotController {
         });
     }
 
-    @FXML private void goToDashboard(ActionEvent event) throws IOException { switchPage(event, "/com/example/javaproject/dashboard-view.fxml"); }
-    private void switchPage(ActionEvent event, String path) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource(path));
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.getScene().setRoot(root);
+    @FXML
+    private void goToDashboard(ActionEvent event) {
+        // Plus besoin de "throws IOException" ni de try-catch ici, le manager s'en occupe
+        SceneManager.switchScene(event, "dashboard-view.fxml");
     }
 }

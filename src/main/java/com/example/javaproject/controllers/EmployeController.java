@@ -2,8 +2,9 @@ package com.example.javaproject.controllers;
 
 import com.example.javaproject.models.Employe;
 import com.example.javaproject.services.EmployeService;
+import com.example.javaproject.utils.SceneManager;
+import javafx.event.ActionEvent;
 
-// iText PDF - Spécifiques pour éviter les conflits avec JavaFX
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.BarcodeQRCode;
 import com.itextpdf.text.pdf.BaseFont;
@@ -12,19 +13,18 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 // JavaFX
 import javafx.collections.FXCollections;
+
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
+
 
 // Utilitaires
 import java.awt.Desktop;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
+
 import java.util.Date;
 
 public class EmployeController {
@@ -316,24 +316,41 @@ public class EmployeController {
         }
     }
 
-    // --- NAVIGATION ---
-    private void navigate(String path) {
-        try {
-            Stage stage = (Stage) tableEmployes.getScene().getWindow();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
-            stage.getScene().setRoot(loader.load());
-        } catch (IOException e) { showError("Navigation", "Vue introuvable."); }
+
+
+    @FXML
+    private void goToDashboard(ActionEvent event) {
+        SceneManager.switchScene(event, "dashboard-view.fxml");
     }
 
-    @FXML private void goToDashboard() { navigate("/com/example/javaproject/dashboard-view.fxml"); }
-    @FXML private void goToFactures() { navigate("/com/example/javaproject/facture-view.fxml"); }
-    @FXML private void goToProduits() { navigate("/com/example/javaproject/produit-view.fxml"); }
-    @FXML private void goToProjets() { navigate("/com/example/javaproject/projet-view.fxml"); }
-    @FXML private void goToEmployes() { navigate("/com/example/javaproject/employe-view.fxml"); }
-    @FXML private void onLogout() { navigate("/com/example/javaproject/hello-view.fxml"); }
     @FXML
-    private void goToChatbot() {
-        navigate("/com/example/javaproject/chatbot-page-view.fxml");
+    private void goToFactures(ActionEvent event) {
+        SceneManager.switchScene(event, "facture-view.fxml");
+    }
+
+    @FXML
+    private void goToProjets(ActionEvent event) {
+        SceneManager.switchScene(event, "projet-view.fxml");
+    }
+
+    @FXML
+    private void goToEmployes(ActionEvent event) {
+        SceneManager.switchScene(event, "employe-view.fxml");
+    }
+
+    @FXML
+    private void goToProduits(ActionEvent event) {
+        SceneManager.switchScene(event, "produit-view.fxml");
+    }
+
+    @FXML
+    private void goToChatbot(ActionEvent event) {
+        SceneManager.switchScene(event, "chatbot-page-view.fxml");
+    }
+
+    @FXML
+    private void onLogout(ActionEvent event) {
+        SceneManager.switchScene(event, "hello-view.fxml");
     }
     private void openFile(File file) {
         try { if (Desktop.isDesktopSupported()) Desktop.getDesktop().open(file); } catch (Exception e) { e.printStackTrace(); }

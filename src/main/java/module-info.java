@@ -10,6 +10,9 @@ module com.example.javaproject {
     requires com.google.zxing;
     requires com.google.zxing.javase;
     requires javafx.swing;
+    requires javafx.base;
+    requires opencv;
+
 
 
     opens com.example.javaproject to javafx.fxml;

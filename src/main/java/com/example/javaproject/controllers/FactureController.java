@@ -4,15 +4,16 @@ import com.example.javaproject.models.Facture;
 import com.example.javaproject.services.FactureService;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
+
 import javafx.geometry.Pos;
-import javafx.scene.Parent;
+
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
-import javafx.stage.Stage;
 
-import java.io.IOException;
+import com.example.javaproject.utils.SceneManager;
+import javafx.event.ActionEvent;
+
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -162,21 +163,39 @@ public class FactureController {
 
     // Navigation FXML
     @FXML public void exportPDF() { showSimpleAlert("Info Export", "Utilisez les boutons dans le tableau pour exporter.", Alert.AlertType.INFORMATION); }
-    @FXML private void goToDashboard() { navigate("/com/example/javaproject/dashboard-view.fxml"); }
-    @FXML private void goToFactures() { refreshData(); }
-    @FXML private void goToProduits() { navigate("/com/example/javaproject/produit-view.fxml"); }
-    @FXML private void goToEmployes() { navigate("/com/example/javaproject/employe-view.fxml"); }
-    @FXML private void goToProjets() { navigate("/com/example/javaproject/projet-view.fxml"); }
-    @FXML private void onLogout() { navigate("/com/example/javaproject/hello-view.fxml"); }
     @FXML
-    private void goToChatbot() {
-        navigate("/com/example/javaproject/chatbot-page-view.fxml");
+    private void goToDashboard(ActionEvent event) {
+        SceneManager.switchScene(event, "dashboard-view.fxml");
     }
-    private void navigate(String path) {
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource(path));
-            Stage stage = (Stage) tableFactures.getScene().getWindow();
-            stage.getScene().setRoot(root);
-        } catch (IOException e) { e.printStackTrace(); }
+
+    @FXML
+    private void goToFactures(ActionEvent event) {
+        SceneManager.switchScene(event, "facture-view.fxml");
     }
+
+    @FXML
+    private void goToProjets(ActionEvent event) {
+        SceneManager.switchScene(event, "projet-view.fxml");
+    }
+
+    @FXML
+    private void goToEmployes(ActionEvent event) {
+        SceneManager.switchScene(event, "employe-view.fxml");
+    }
+
+    @FXML
+    private void goToProduits(ActionEvent event) {
+        SceneManager.switchScene(event, "produit-view.fxml");
+    }
+
+    @FXML
+    private void goToChatbot(ActionEvent event) {
+        SceneManager.switchScene(event, "chatbot-page-view.fxml");
+    }
+
+    @FXML
+    private void onLogout(ActionEvent event) {
+        SceneManager.switchScene(event, "hello-view.fxml");
+    }
+
 }
